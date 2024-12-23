@@ -15,14 +15,14 @@ calculateButton.addEventListener("click", () => {
   }
 
   fetch(
-    https://v6.exchangerate-api.com/v6/814385ebe55498d47ded4e4f/latest/${from}
+    `https://v6.exchangerate-api.com/v6/814385ebe55498d47ded4e4f/latest/${from}`
   )
     .then((res) => res.json())
     .then((response) => {
       const conversionRate = response.conversion_rates[to];
       if (conversionRate !== undefined) {
         const result = amount * conversionRate;
-        outputElement.textContent = ${amount} ${from} = ${result} ${to};
+        outputElement.textContent = `${amount} ${from} = ${result} ${to}`;
         outputElement.style.display = "block";
       } else {
         alert("Invalid currency selection");
@@ -30,5 +30,5 @@ calculateButton.addEventListener("click", () => {
     })
     .catch((e) => {
       alert("Something went wrong");
-    });
+    });
 });
