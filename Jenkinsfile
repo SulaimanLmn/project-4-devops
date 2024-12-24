@@ -5,14 +5,14 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the GitHub repository
-                git url: 'https://github.com/SulaimanLmn/project-4-devops.git', branch: 'main'
+                git url: 'https://github.com/SulaimanLmn/project-4-devops.git',
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build the Docker image using the Dockerfile from the cloned repo
-                    sh 'docker build -t project-4-image .'
+                    sh 'docker build -t project-4-image1 .'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
                     sh 'docker rm project-4-container || true'
 
                     // Run a new container from the built image
-                    sh 'docker run --rm -d --name project-4-container -p 8081:80 project-4-image'
+                    sh 'docker run --rm -d --name project-4-container -p 8081:80 project-4-image2'
                 }
             }
         }
