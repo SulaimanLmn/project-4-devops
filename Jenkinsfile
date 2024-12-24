@@ -2,19 +2,40 @@ pipeline {
     agent any
 
     stages {
+        stage('Clone Repository') {
+            steps {
+                // Clone the GitHub repository
+                git url: 'https://github.com/SulaimanLmn/project-4-devops.git', branch: 'main'
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t converter-app .'
+                    // Build the Docker image using the Dockerfile from the cloned repo
+                    sh 'docker build -t project-4-image .'
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run --rm -d -p 8081:80 converter-app'
+                    // Stop and remove any previous container with the same name
+                    sh 'docker stop project-4-container || true'
+                    sh 'docker rm project-4-container || true'
+
+                    // Run a new container from the built image
+                    sh 'docker run --rm -d --name project-4-container -p 8081:80 project-4-image'
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed!'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
