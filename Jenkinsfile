@@ -7,7 +7,7 @@ pipeline {
                 script {
                     echo "Cloning repository..."
                     // Clone the branch based on which one is being built
-                    git branch: "${BRANCH_NAME}", url: 'https://github.com/SulaimanLmn/test-again.git'
+                    git branch: "${BRANCH_NAME}", url: 'https://github.com/SulaimanLmn/project-4-devops.git'
                 }
             }
         }
